@@ -1,4 +1,4 @@
-<header class="banner">
+<header itemscope="itemscope" itemtype="https://www.schema.org/WPHeader" class="banner">
   <div class="no-container">
     <nav class="nav-primary navbar navbar-expand-lg navbar-light bg-light">
       <a class="brand" href="{{ home_url('/') }}">{{ get_bloginfo('name', 'display') }}</a>

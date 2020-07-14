@@ -136,3 +136,56 @@ function display_sidebar()
     isset($display) || $display = apply_filters('sage/display_sidebar', false);
     return $display;
 }
+
+/**
+ * Block variables
+ * @return object
+ */
+function block_vars()
+{
+    $editorConfig = json_decode(file_get_contents(__DIR__ .'/../resources/assets/editor.json'));
+
+    $values = (object) [
+        'colors' => gather_colors($editorConfig),
+        'font_sizes' => gather_font_sizes($editorConfig),
+    ];
+
+    return $values;
+}
+
+/**
+ * Gather Colors
+ * @param  object config
+ * @return array colors
+ */
+function gather_colors($editorConfig)
+{
+    $colors = [];
+    foreach ($editorConfig->styles->colors as $name => $color) {
+        $colors[] = [
+            'name'  => $name,
+            'slug'  => $name,
+            'color' => $color,
+        ];
+    }
+    return $colors;
+}
+
+/**
+ * Gather font sizes
+ * @param  object config
+ * @return array sizes
+ */
+function gather_font_sizes($editorConfig)
+{
+    $sizes = [];
+    foreach ($editorConfig->styles->fontSizes as $name => $size) {
+        $sizes[] = [
+            'name'      => $name,
+            'shortName' => $name,
+            'size'      => $size,
+            'slug'      => $name
+        ];
+    }
+    return $sizes;
+}

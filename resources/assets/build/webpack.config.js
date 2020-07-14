@@ -7,6 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyGlobsPlugin = require('copy-globs-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const JsonToScssPlugin = require('./util/JsonToScssPlugin')
 
 const desire = require('./util/desire');
 const config = require('./config');
@@ -159,6 +160,7 @@ let webpackConfig = {
       'window.jQuery': 'jquery',
       Popper: 'popper.js/dist/umd/popper.js',
     }),
+    new JsonToScssPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: config.enabled.optimize,
       debug: config.enabled.watcher,

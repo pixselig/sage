@@ -27,6 +27,33 @@ add_filter('body_class', function (array $classes) {
 });
 
 /**
+ * Add "wp-editor" to post classes
+ */
+add_filter('post_class', function ($classes) {
+    global $post;
+    $classes[] = 'wp-editor';
+    return $classes;
+});
+
+/**
+ * Add wrapper element to blocks with the "full" or "wide" attribute
+ */
+add_filter('render_block', function ($block_content, $block) {
+    // Only on the frontend and only for blocks that have an alignment
+    if (is_admin() || !isset($block['attrs']['align'])) {
+        return $block_content;
+    }
+
+    if ($block['attrs']['align']=='wide') {
+        return $block_content = '<div class="wp-block-wrap wp-block-wide-wrap">'. $block_content .'</div>';
+    } elseif ($block['attrs']['align']=='full') {
+        return $block_content = '<div class="wp-block-wrap wp-block-full-wrap">'. $block_content .'</div>';
+    }
+
+    return $block_content;
+}, 10, 2);
+
+/**
  * Add "… Continued" to the excerpt
  */
 add_filter('excerpt_more', function () {

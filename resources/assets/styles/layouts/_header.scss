@@ -1,3 +1,7 @@
+.banner > :first-child {
+  @include wp-editor-contain();
+}
+
 .banner .nav li {
   @extend .nav-item;
 }

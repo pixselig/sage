@@ -1,5 +1,5 @@
 <div class="page-header">
-  <div>
+  <div class="no-container">
     <h1>{!! App::title() !!}</h1>
   </div>
 </div>

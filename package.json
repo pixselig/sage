@@ -45,6 +45,7 @@
     "cache-loader": "~1.2.5",
     "clean-webpack-plugin": "^0.1.18",
     "copy-globs-webpack-plugin": "^0.2.0",
+    "copy-webpack-plugin": "4.6.0",
     "css-loader": "^0.28.9",
     "cssnano": "~4.0.5",
     "eslint": "~4.19.1",
@@ -83,6 +84,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",
+    "jquery-migrate": "^3.3.1",
     "popper.js": "^1.16.1-lts"
   }
 }

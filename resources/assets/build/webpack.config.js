@@ -7,7 +7,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyGlobsPlugin = require('copy-globs-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const JsonToScssPlugin = require('./util/JsonToScssPlugin')
+const JsonToScssPlugin = require('./util/JsonToScssPlugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const desire = require('./util/desire');
 const config = require('./config');
@@ -215,6 +216,23 @@ if (config.enabled.watcher) {
   webpackConfig.entry = require('./util/addHotMiddleware')(webpackConfig.entry);
   webpackConfig = merge(webpackConfig, require('./webpack.config.watch'));
 }
+
+/**
+ * We add our local Scripts
+ * https://www.npmjs.com/package/copy-webpack-plugin/v/4.6.0
+ */
+webpackConfig.plugins.push(
+  new CopyPlugin([
+    {
+      from: '../../node_modules/jquery/dist/jquery.min.js',
+      to: config.paths.dist + '/scripts/jquery.min.js',
+    },
+    {
+      from: '../../node_modules/jquery-migrate/dist/jquery-migrate.min.js',
+      to: config.paths.dist + '/scripts/jquery-migrate.min.js',
+    }
+  ]),
+);
 
 /**
  * During installation via sage-installer (i.e. composer create-project) some
